@@ -4,16 +4,26 @@ import customTheme from '../customTheme'
 import { ThemeProvider } from "@mui/material";
 import {CssTextField} from "../customTheme";
 
+import {useFormik} from "formik";
+import * as Yup from "yup";
+
 const SignUp = () => {
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
-    }
+    const formik = useFormik({
+        initialValues: {
+            email: '',
+            password: '',
+        },
+        validationSchema: Yup.object({
+            email: Yup.string().email("email required").required("required"),
+            password: Yup.string().min(6).required("required")
+        }),
+        onSubmit: (values) => {
+            console.log(values)
+        },
+    })
+
+    console.log(formik.errors)
 
     return(
         <>
@@ -39,7 +49,7 @@ const SignUp = () => {
                         <Typography component="h1" variant="h5">
                             Sign Up
                         </Typography>
-                        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+                        <Box component="form" onSubmit={formik.handleSubmit} noValidate sx={{ mt: 1 }}>
                             <CssTextField
                                 autoComplete= "off"
                                 margin="normal"
@@ -50,8 +60,10 @@ const SignUp = () => {
                                 name="email"
                                 autoFocus
                                 color='secondary'
-
-
+                                onChange={formik.handleChange}
+                                value={formik.values.email}
+                                error={formik.touched.email && Boolean(formik.errors.email)}
+                                helperText={formik.touched.email && formik.errors.email}
                             />
                             <CssTextField
                                 margin="normal"
@@ -61,7 +73,10 @@ const SignUp = () => {
                                 label="Password"
                                 type="password"
                                 id="password"
-                                autoComplete="current-password"
+                                onChange={formik.handleChange}
+                                value={formik.values.password}
+                                error={formik.touched.password && Boolean(formik.errors.password)}
+                                helperText={formik.touched.password && formik.errors.password}
                             />
                             <Button
                                 type="submit"

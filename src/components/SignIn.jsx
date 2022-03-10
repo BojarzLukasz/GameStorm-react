@@ -4,34 +4,30 @@ import customTheme from '../customTheme'
 import { ThemeProvider } from "@mui/material";
 import {Link} from "react-router-dom";
 import {CssTextField} from "../customTheme";
+import {signInWithEmailAndPassword} from "firebase/auth";
+import {auth} from "../firebase-config";
+import {schema} from "../validations";
+import {useFormik} from 'formik'
+import * as Yup from "yup";
+
 
 const SignIn = () => {
 
+    const formik = useFormik({
+        initialValues: {
+            email: '',
+            password: '',
+        },
+        validationSchema: Yup.object({
+            email: Yup.string().email("email required").required("required"),
+            password: Yup.string().min(6).required("required")
+        }),
+        onSubmit: (values) => {
+            console.log(values)
+        }
+    })
 
-    useEffect(() => {
-        fetchItems();
-    }, [])
-
-    const [games, setGames] = useState([]);
-
-    const fetchItems = async () => {
-        const data = await fetch('https://api.rawg.io/api/games?key=ec3a8cae002c48538ce195406a786904');
-        const games = await data.json();
-        console.log(games.results);
-        setGames(games);
-    };
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        // eslint-disable-next-line no-console
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
-    }
-
-
+    console.log(formik.errors)
 
     return(
         <>
@@ -56,7 +52,7 @@ const SignIn = () => {
                             <Typography component="h1" variant="h5">
                                 Sign in
                             </Typography>
-                            <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+                            <Box component="form" onSubmit={formik.handleSubmit} noValidate sx={{ mt: 1 }}>
                                 <CssTextField
                                     autoComplete= "off"
                                     margin="normal"
@@ -66,6 +62,11 @@ const SignIn = () => {
                                     label="Email Address"
                                     name="email"
                                     autoFocus
+                                    onChange={formik.handleChange}
+                                    value={formik.values.email}
+                                    error={formik.touched.email && Boolean(formik.errors.email)}
+                                    helperText={formik.touched.email && formik.errors.email}
+
                                 />
                                 <CssTextField
                                     margin="normal"
@@ -76,9 +77,13 @@ const SignIn = () => {
                                     type="password"
                                     id="password"
                                     autoComplete="current-password"
+                                    onChange={formik.handleChange}
+                                    value={formik.values.password}
+                                    error={formik.touched.password && Boolean(formik.errors.password)}
+                                    helperText={formik.touched.password && formik.errors.password}
                                 />
                                 <FormControlLabel
-                                    control={<Checkbox value="remember" color="secondary" sx={{color: 'white'}}/>}
+                                    control={<Checkbox value="remember" color="secondary" sx={{pt: 2, color: 'white'}}/>}
                                     label="Remember me"
                                 />
                                 <Button
@@ -87,6 +92,7 @@ const SignIn = () => {
                                     variant="contained"
                                     sx={{ mt: 3, mb: 2 }}
                                     color='secondary'
+                                    /*onClick={login}*/
                                 >
                                     Sign In
                                 </Button>

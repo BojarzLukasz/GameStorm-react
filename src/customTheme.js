@@ -4,6 +4,7 @@ import {styled} from "@mui/material/styles";
 const primaryColor = "rgba(0, 0, 0, 0.60)"
 const secondaryColor = "#680f79"
 const thirdColor = 'white'
+
 const customTheme = createTheme({
     palette: {
         primary: {
@@ -24,6 +25,14 @@ const customTheme = createTheme({
                 },
             },
         },
+        MuiFormHelperText: {
+            styleOverrides: {
+                root: {
+                    marginTop: 0,
+                    height: 0,
+                },
+            },
+        },
     }
 })
 
@@ -32,6 +41,9 @@ const customTheme = createTheme({
 export const CssTextField = styled(TextField)({
     '& label.Mui-focused': {
         color: thirdColor,
+    },
+    '& label.Mui-error': {
+        color: 'error.main'
     },
     '& .MuiOutlinedInput-root': {
         '& fieldset': {
@@ -46,7 +58,7 @@ export const CssTextField = styled(TextField)({
     },
     '& input': {
         color: thirdColor
-    }
+    },
 });
 
 
