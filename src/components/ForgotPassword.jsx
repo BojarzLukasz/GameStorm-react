@@ -1,34 +1,10 @@
 import React from 'react'
-import {Container, Box, Avatar, Typography, TextField, Button} from '@mui/material'
-import { styled } from '@mui/material/styles';
+import {Container, Box, Avatar, Typography, Button} from '@mui/material'
 import customTheme from '../customTheme'
 import { ThemeProvider } from "@mui/material";
-
+import {CssTextField} from "../customTheme";
 
 const ForgotPassword = () => {
-
-    const CssTextField = styled(TextField)({
-        '& label.Mui-focused': {
-            color: 'white',
-        },
-        '& .MuiInput-underline:after': {
-            borderBottomColor: 'secondary',
-        },
-        '& .MuiOutlinedInput-root': {
-            '& fieldset': {
-                borderColor: 'white',
-            },
-            '&:hover fieldset': {
-                borderColor: customTheme.palette.secondary.main,
-            },
-            '&. Mui-focused fieldset': {
-                borderColor: customTheme.palette.secondary.main,
-            },
-        },
-        '& 	.MuiFormHelperText-filled': {
-            backgroundColor: 'red'
-        }
-    });
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -74,8 +50,6 @@ const ForgotPassword = () => {
                                 name="email"
                                 autoFocus
                                 color='secondary'
-                                sx={{ input: { color: customTheme.palette.third.main } }}
-
                             />
                             <Button
                                 type="submit"

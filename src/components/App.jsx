@@ -1,7 +1,6 @@
 import React from 'react'
-import { ThemeProvider } from "@mui/material";
+import { ThemeProvider, CssBaseline  } from "@mui/material";
 import customTheme from '../customTheme'
-import {CssBaseline} from '@mui/material'
 import MainPage from "./MainPage";
 import SignUp from "./SignUp";
 import SignIn from "./SignIn";

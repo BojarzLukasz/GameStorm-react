@@ -1,10 +1,9 @@
 import React, {useEffect, useState} from 'react'
-import {Container, Box, Avatar, Typography, TextField, FormControlLabel, Grid, Button, Checkbox} from '@mui/material'
-import { styled } from '@mui/material/styles';
+import {Container, Box, Avatar, Typography, FormControlLabel, Grid, Button, Checkbox} from '@mui/material'
 import customTheme from '../customTheme'
 import { ThemeProvider } from "@mui/material";
 import {Link} from "react-router-dom";
-
+import {CssTextField} from "../customTheme";
 
 const SignIn = () => {
 
@@ -21,29 +20,6 @@ const SignIn = () => {
         console.log(games.results);
         setGames(games);
     };
-
-    const CssTextField = styled(TextField)({
-        '& label.Mui-focused': {
-            color: 'white',
-        },
-        '& .MuiInput-underline:after': {
-            borderBottomColor: 'secondary',
-        },
-        '& .MuiOutlinedInput-root': {
-            '& fieldset': {
-                borderColor: 'white',
-            },
-            '&:hover fieldset': {
-                borderColor: customTheme.palette.secondary.main,
-            },
-            '&. Mui-focused fieldset': {
-                borderColor: customTheme.palette.secondary.main,
-            },
-        },
-        '& 	.MuiFormHelperText-filled': {
-            backgroundColor: 'red'
-        }
-    });
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -90,9 +66,6 @@ const SignIn = () => {
                                     label="Email Address"
                                     name="email"
                                     autoFocus
-                                    color='secondary'
-                                    sx={{ input: { color: customTheme.palette.third.main } }}
-
                                 />
                                 <CssTextField
                                     margin="normal"
@@ -103,7 +76,6 @@ const SignIn = () => {
                                     type="password"
                                     id="password"
                                     autoComplete="current-password"
-                                    sx={{ input: { color: customTheme.palette.third.main  } }}
                                 />
                                 <FormControlLabel
                                     control={<Checkbox value="remember" color="secondary" sx={{color: 'white'}}/>}

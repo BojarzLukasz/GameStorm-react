@@ -1,35 +1,10 @@
 import React from 'react'
-import {Container, Box, Avatar, Typography, TextField, Button} from '@mui/material'
-import { styled } from '@mui/material/styles';
+import {Container, Box, Avatar, Typography, Button} from '@mui/material'
 import customTheme from '../customTheme'
 import { ThemeProvider } from "@mui/material";
-
+import {CssTextField} from "../customTheme";
 
 const SignUp = () => {
-
-    const CssTextField = styled(TextField)({
-        '& label.Mui-focused': {
-            color: 'white',
-        },
-        '& .MuiInput-underline:after': {
-            borderBottomColor: 'secondary',
-        },
-        '& .MuiOutlinedInput-root': {
-            '& fieldset': {
-                borderColor: 'white',
-            },
-            '&:hover fieldset': {
-                borderColor: customTheme.palette.secondary.main,
-            },
-            '&. Mui-focused fieldset': {
-                borderColor: customTheme.palette.secondary.main,
-            },
-        },
-        '& 	.MuiFormHelperText-filled': {
-            backgroundColor: 'red'
-        }
-    });
-
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -39,8 +14,6 @@ const SignUp = () => {
             password: data.get('password'),
         });
     }
-
-
 
     return(
         <>
@@ -77,7 +50,7 @@ const SignUp = () => {
                                 name="email"
                                 autoFocus
                                 color='secondary'
-                                sx={{ input: { color: customTheme.palette.third.main } }}
+
 
                             />
                             <CssTextField
@@ -89,7 +62,6 @@ const SignUp = () => {
                                 type="password"
                                 id="password"
                                 autoComplete="current-password"
-                                sx={{ input: { color: customTheme.palette.third.main  } }}
                             />
                             <Button
                                 type="submit"
