@@ -1,18 +1,16 @@
 import React, {useEffect, useState} from 'react'
-import {Container, Box, Avatar, Typography, FormControlLabel, Grid, Button, Checkbox} from '@mui/material'
-import customTheme from '../customTheme'
-import { ThemeProvider } from "@mui/material";
-import {Link} from "react-router-dom";
-import {CssTextField} from "../customTheme";
-import {signInWithEmailAndPassword} from "firebase/auth";
-import {auth} from "../firebase-config";
-import {schema} from "../validations";
+import {Link, useNavigate} from "react-router-dom"
 import {useFormik} from 'formik'
-import * as Yup from "yup";
-
+import * as Yup from "yup"
+import {CssTextField} from "../customTheme"
+import {Container, Box, Avatar, Typography, FormControlLabel, Grid, Button, Checkbox, ThemeProvider, Alert} from '@mui/material'
+import {onAuthStateChanged, signInWithEmailAndPassword} from "firebase/auth"
+import {auth} from "../firebase-config"
+import customTheme from '../customTheme'
 
 const SignIn = () => {
 
+    const navigate = useNavigate()
     const formik = useFormik({
         initialValues: {
             email: '',
@@ -23,14 +21,34 @@ const SignIn = () => {
             password: Yup.string().min(6).required("required")
         }),
         onSubmit: (values) => {
-            console.log(values)
+            login(values.email, values.password)
         }
     })
 
-    console.log(formik.errors)
+    const [error, setError] = useState('')
+
+    async function login(email, password) {
+        try {
+            const user = await signInWithEmailAndPassword(auth, email, password);
+            console.log(user)
+        } catch (error) {
+            console.log(error.message);
+            setError(error.message)
+        }
+    }
+
+    const [user, setUser] = useState("Użytkownik niezalogowany");
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (user) {
+                navigate('/Main');
+                setUser(user.email);
+            }
+        });
+        return () => unsubscribe();
+    }, []);
 
     return(
-        <>
             <ThemeProvider theme={customTheme}>
                     <Container sx={{pt: 17, display: 'flex', justifyContent: 'center', alignContent: 'center'}} maxWidth="l">
                         <Box
@@ -45,14 +63,14 @@ const SignIn = () => {
                                 backdropFilter: 'blur(3px)',
                                 color: 'white',
                                 p: 5
-                                }}>
-                            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-
-                            </Avatar>
+                            }}
+                        >
+                            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}/>
                             <Typography component="h1" variant="h5">
                                 Sign in
                             </Typography>
                             <Box component="form" onSubmit={formik.handleSubmit} noValidate sx={{ mt: 1 }}>
+                                {error && <Alert severity="error">invalid email or password</Alert>}
                                 <CssTextField
                                     autoComplete= "off"
                                     margin="normal"
@@ -66,7 +84,6 @@ const SignIn = () => {
                                     value={formik.values.email}
                                     error={formik.touched.email && Boolean(formik.errors.email)}
                                     helperText={formik.touched.email && formik.errors.email}
-
                                 />
                                 <CssTextField
                                     margin="normal"
@@ -92,7 +109,6 @@ const SignIn = () => {
                                     variant="contained"
                                     sx={{ mt: 3, mb: 2 }}
                                     color='secondary'
-                                    /*onClick={login}*/
                                 >
                                     Sign In
                                 </Button>
@@ -112,8 +128,7 @@ const SignIn = () => {
                         </Box>
                     </Container>
             </ThemeProvider>
-        </>
-    );
+    )
 }
 
 export default SignIn;

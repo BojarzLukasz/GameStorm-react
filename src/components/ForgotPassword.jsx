@@ -1,24 +1,11 @@
 import React from 'react'
-import {Container, Box, Avatar, Typography, Button} from '@mui/material'
+import {Container, Box, Avatar, Typography, Button, ThemeProvider } from '@mui/material'
+import {useFormik} from "formik"
+import * as Yup from "yup"
 import customTheme from '../customTheme'
-import { ThemeProvider } from "@mui/material";
-import {CssTextField} from "../customTheme";
-import {useFormik} from "formik";
-import * as Yup from "yup";
+import {CssTextField} from "../customTheme"
 
 const ForgotPassword = () => {
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
-    }
-
-    const resetPW = async () => {}
-
 
     const formik = useFormik({
         initialValues: {
@@ -37,9 +24,7 @@ const ForgotPassword = () => {
     console.log(formik.errors)
 
     return(
-        <>
             <ThemeProvider theme={customTheme}>
-
                 <Container sx={{pt: 17, display: 'flex', justifyContent: 'center', alignContent: 'center'}} maxWidth="l">
                     <Box
                         sx={{
@@ -53,10 +38,9 @@ const ForgotPassword = () => {
                             backdropFilter: 'blur(3px)',
                             color: 'white',
                             p: 5
-                        }}>
-                        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-
-                        </Avatar>
+                        }}
+                    >
+                        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}/>
                         <Typography component="h1" variant="h5">
                             Reset your password
                         </Typography>
@@ -87,9 +71,7 @@ const ForgotPassword = () => {
                         </Box>
                     </Box>
                 </Container>
-
             </ThemeProvider>
-        </>
     );
 }
 

@@ -1,14 +1,17 @@
-import React from 'react'
-import {Container, Box, Avatar, Typography, Button} from '@mui/material'
+import React, {useEffect, useState} from 'react'
+import {Container, Box, Avatar, Typography, Button, ThemeProvider, Alert } from '@mui/material'
+import {useFormik} from "formik"
+import * as Yup from "yup"
+import {createUserWithEmailAndPassword, onAuthStateChanged} from "firebase/auth"
+import {auth} from "../firebase-config";
 import customTheme from '../customTheme'
-import { ThemeProvider } from "@mui/material";
-import {CssTextField} from "../customTheme";
+import {CssTextField} from "../customTheme"
+import {useNavigate} from "react-router-dom";
 
-import {useFormik} from "formik";
-import * as Yup from "yup";
 
 const SignUp = () => {
 
+    const navigate = useNavigate()
     const formik = useFormik({
         initialValues: {
             email: '',
@@ -19,16 +22,35 @@ const SignUp = () => {
             password: Yup.string().min(6).required("required")
         }),
         onSubmit: (values) => {
-            console.log(values)
-        },
+            register(values.email, values.password)
+        }
     })
 
-    console.log(formik.errors)
+    const [user, setUser] = useState("Użytkownik niezalogowany");
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (user) {
+                navigate('/Main');
+                setUser(user.email);
+            }
+        });
+        return () => unsubscribe();
+    }, []);
+
+    const [error, setError] = useState('')
+
+    async function register(email, password) {
+        try {
+            const user = await createUserWithEmailAndPassword(auth, email, password);
+            console.log(user)
+        } catch (error) {
+            console.log(error.message);
+            setError(error.message);
+        }
+    }
 
     return(
-        <>
             <ThemeProvider theme={customTheme}>
-
                 <Container sx={{pt: 17, display: 'flex', justifyContent: 'center', alignContent: 'center'}} maxWidth="l">
                     <Box
                         sx={{
@@ -43,17 +65,16 @@ const SignUp = () => {
                             color: 'white',
                             p: 5
                         }}>
-                        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-
-                        </Avatar>
+                        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}/>
                         <Typography component="h1" variant="h5">
                             Sign Up
                         </Typography>
                         <Box component="form" onSubmit={formik.handleSubmit} noValidate sx={{ mt: 1 }}>
+                            {error && <Alert severity="error">this mail is already used</Alert>}
                             <CssTextField
                                 autoComplete= "off"
                                 margin="normal"
-                                required
+                                /*required*/
                                 fullWidth
                                 id="email"
                                 label="Email Address"
@@ -67,7 +88,6 @@ const SignUp = () => {
                             />
                             <CssTextField
                                 margin="normal"
-                                required
                                 fullWidth
                                 name="password"
                                 label="Password"
@@ -90,9 +110,7 @@ const SignUp = () => {
                         </Box>
                     </Box>
                 </Container>
-
             </ThemeProvider>
-        </>
     );
 }
 
