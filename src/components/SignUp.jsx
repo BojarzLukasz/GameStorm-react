@@ -10,7 +10,6 @@ import {useNavigate} from "react-router-dom";
 
 
 const SignUp = () => {
-
     const navigate = useNavigate()
     const formik = useFormik({
         initialValues: {
@@ -25,20 +24,17 @@ const SignUp = () => {
             register(values.email, values.password)
         }
     })
-
     const [user, setUser] = useState("Użytkownik niezalogowany");
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
                 navigate('/Main');
-                setUser(user.email);
+                setUser(user?.email);
             }
         });
         return () => unsubscribe();
-    }, []);
-
+    });
     const [error, setError] = useState('')
-
     async function register(email, password) {
         try {
             const user = await createUserWithEmailAndPassword(auth, email, password);
@@ -48,9 +44,8 @@ const SignUp = () => {
             setError(error.message);
         }
     }
-
     return(
-            <ThemeProvider theme={customTheme}>
+        <ThemeProvider theme={customTheme}>
                 <Container sx={{pt: 17, display: 'flex', justifyContent: 'center', alignContent: 'center'}} maxWidth="l">
                     <Box
                         sx={{
@@ -113,5 +108,4 @@ const SignUp = () => {
             </ThemeProvider>
     );
 }
-
 export default SignUp;

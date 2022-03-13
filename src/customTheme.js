@@ -1,4 +1,4 @@
-import {Box, createTheme, TextField} from "@mui/material";
+import {Box, createTheme, TextField, Typography} from "@mui/material";
 import {styled} from "@mui/material/styles";
 
 const primaryColor = "rgba(0, 0, 0, 0.60)"
@@ -40,9 +40,11 @@ export const Item = styled(Box)({
     backgroundColor: primaryColor,
     color: thirdColor ,
     display: 'flex',
+    alignItems: 'center',
+    overflow: 'hidden',
     justifyContent: 'center',
-    height: 350,
-    borderRadius: 10
+    height: 650,
+    borderRadius: 50,
 });
 
 export const ItemXs = styled(Box)({
@@ -53,6 +55,10 @@ export const ItemXs = styled(Box)({
     height: 200,
     borderRadius: 10
 });
+
+export const CSSTypography = styled(Typography)({
+    color: thirdColor
+})
 
 
 export const CssTextField = styled(TextField)({

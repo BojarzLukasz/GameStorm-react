@@ -42,11 +42,12 @@ const SignIn = () => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
                 navigate('/Main');
-                setUser(user.email);
+                setUser(user?.email);
             }
         });
+        console.log('hi')
         return () => unsubscribe();
-    }, []);
+    }, [navigate, user]);
 
     return(
             <ThemeProvider theme={customTheme}>

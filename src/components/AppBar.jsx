@@ -5,9 +5,7 @@ import {auth} from "../firebase-config";
 import {signOut} from "firebase/auth"
 
 const CustomAppBar = ({user}) => {
-
     const [loggedIn, setLoggedIn] = useState(null)
-
     auth.onAuthStateChanged((user) => {
         if(user){
             setLoggedIn(true)
@@ -15,12 +13,10 @@ const CustomAppBar = ({user}) => {
             setLoggedIn(false)
         }
     })
-
     async function logOut() {
         signOut(auth);
     }
-
-return(
+    return(
         <AppBar style={{
             backdropFilter: 'blur(3px)',
             display: "flex",
@@ -29,9 +25,9 @@ return(
             justifyContent: "space-between"}}>
             <Toolbar>
                 <GamepadOutlined sx={{mr: 2}} fontSize="large"/>
-                  <Typography variant='h3'>
-                        Gamestore
-                  </Typography>
+                <Typography variant='h3'>
+                    Gamestore
+                </Typography>
             </Toolbar>
             {loggedIn && <Toolbar>
                 <Typography sx={{ fontSize: 25}}>{user}</Typography>
@@ -43,5 +39,4 @@ return(
         </AppBar>
     )
 }
-
 export default CustomAppBar;
