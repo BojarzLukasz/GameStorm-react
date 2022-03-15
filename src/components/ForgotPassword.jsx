@@ -14,8 +14,7 @@ const ForgotPassword = () => {
             email: Yup.string().email("email required").required("required"),
             password: Yup.string().min(6).required("required")
         }),
-        onSubmit: (values) => {
-        }
+
     })
     return(
         <ThemeProvider theme={customTheme}>

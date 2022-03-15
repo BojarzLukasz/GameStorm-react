@@ -51,7 +51,7 @@ export const ItemXs = styled(Box)({
     backgroundColor: primaryColor,
     color: thirdColor ,
     borderRadius: 10,
-    padding: 2
+    padding: 10
 });
 
 export const CSSTypography = styled(Typography)({

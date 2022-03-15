@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react"
 import {Card, CardMedia, CardContent, Grid} from "@mui/material";
 import CustomTheme, {CSSTypography} from "../customTheme";
 import {useNavigate} from "react-router-dom";
-const CustomCard = () => {
+const Cards = () => {
     const [games, setGames] = useState([])
     useEffect(() => {
         fetch('https://api.rawg.io/api/games?key=ec3a8cae002c48538ce195406a786904&page=2&page_size=20')
@@ -55,4 +55,4 @@ const CustomCard = () => {
         </>
     )
 }
-export default CustomCard;
+export default Cards;

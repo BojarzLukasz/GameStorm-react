@@ -2,8 +2,9 @@ import React from "react"
 import Grid from '@mui/material/Grid';
 import {Container} from "@mui/material";
 import {SimpleSlider} from "./Slider";
-import CustomCard from "./Cards";
 import {useNavigate} from "react-router-dom";
+import Cards from "./Cards";
+
 const MainPage = () =>  {
     let navigate = useNavigate();
     function handleClick() {
@@ -21,7 +22,7 @@ const MainPage = () =>  {
                       spacing={4}
                       style={{justifyContent: 'center'}}
                 >
-                    <CustomCard onClick={handleClick}/>
+                    <Cards onClick={handleClick}/>
                 </Grid>
             </Container>
         </>

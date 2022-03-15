@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import Slider from "react-slick";
 import {Box} from "@mui/material";
 import {CSSTypography, Item} from "../customTheme";
-import {useNavigate} from "react-router-dom";
+
 
 export const SimpleSlider = () => {
     const [games, setGames] = useState([])
@@ -11,7 +11,7 @@ export const SimpleSlider = () => {
             .then(data => data.json())
             .then(json => setGames(json.results))
     }, [])
-    let navigate = useNavigate();
+
     const settings = {
         dots: true,
         arrows: false,
@@ -32,7 +32,7 @@ export const SimpleSlider = () => {
                 {games.map((item, index)=> {
                     return <Item key={index}
                     >
-                        <div onClick={() => navigate(`/SingleCard/${item.slug}`)} style={{
+                        <div style={{
                             width: '100%',
                             height: '100%',
                             backgroundImage: `url("${item.background_image}")`,
@@ -53,3 +53,6 @@ export const SimpleSlider = () => {
         </Box>
     );
 }
+
+/*
+onClick={() => navigate(`/SingleCard/${item.slug}`)}*/

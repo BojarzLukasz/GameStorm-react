@@ -24,7 +24,7 @@ const SignIn = () => {
     const [error, setError] = useState('')
     async function login(email, password) {
         try {
-            const user = signInWithEmailAndPassword(auth, email, password);
+            await signInWithEmailAndPassword(auth, email, password);
         } catch (error) {
             setError(error.message)
         }

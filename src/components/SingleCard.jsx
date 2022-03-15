@@ -26,7 +26,7 @@ const SingleCard = () => {
                          borderRadius: 5,
                          backdropFilter: 'blur(3px)',
                          color: 'white',
-                         p: 2
+                         p: 5
                      }}>
                     <Box gridColumn="span 12">
                         <Grid container spacing={2}>
@@ -79,7 +79,7 @@ const SingleCard = () => {
                                 <ItemXs>
                                     <Typography variant='h6'>Website</Typography>
                                     <Typography variant='body2'>
-                                        <a href="">
+                                        <a href={game && game.website} style={{color: 'white'}}>
                                             {game && game.website}</a></Typography>
                                 </ItemXs>
                             </Grid>

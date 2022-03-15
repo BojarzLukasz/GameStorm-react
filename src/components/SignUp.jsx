@@ -7,6 +7,7 @@ import {auth} from "../firebase-config";
 import customTheme from '../customTheme'
 import {CssTextField} from "../customTheme"
 import {useNavigate} from "react-router-dom";
+
 const SignUp = () => {
     const navigate = useNavigate()
     const formik = useFormik({
@@ -31,11 +32,11 @@ const SignUp = () => {
             }
         });
         return () => unsubscribe();
-    });
+    }, [user, navigate]);
     const [error, setError] = useState('')
     async function register(email, password) {
         try {
-            const user = await createUserWithEmailAndPassword(auth, email, password);
+            await createUserWithEmailAndPassword(auth, email, password);
         } catch (error) {
             setError(error.message);
         }
