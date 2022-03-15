@@ -1,43 +1,27 @@
 import React from "react"
-import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import {Card, CardMedia, CardContent, CardActions, Button, Typography, Container} from "@mui/material";
-import {ItemXs} from "../customTheme";
-import {SimpleSlider} from "./slider";
-import CustomCard from "./card";
-
-
+import {Container} from "@mui/material";
+import {SimpleSlider} from "./Slider";
+import CustomCard from "./Cards";
+import {useNavigate} from "react-router-dom";
 const MainPage = () =>  {
-
-/*
-    const [user, setUser] = useState("Użytkownik niezalogowany");
-
-    const navigate = useNavigate()
-    useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (user) => {
-            if (!user) {
-                navigate('/');
-                setUser(user?.email);
-            }
-        });
-        return () => unsubscribe();
-    }, []);
-
-*/
-
+    let navigate = useNavigate();
+    function handleClick() {
+        navigate('/SingleCard')
+    }
     return(
         <>
             <Container
-                    maxWidth={"xl"}
-                    style={{display: 'flex', justifyContent: 'center', marginBottom: '100px'}}>
-                    <SimpleSlider/>
+                maxWidth={'lg'}
+                style={{display: 'flex', justifyContent: 'center', marginBottom: '100px'}}>
+                <SimpleSlider/>
             </Container>
             <Container>
                 <Grid container
                       spacing={4}
                       style={{justifyContent: 'center'}}
                 >
-                    <CustomCard/>
+                    <CustomCard onClick={handleClick}/>
                 </Grid>
             </Container>
         </>

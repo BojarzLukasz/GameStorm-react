@@ -43,17 +43,15 @@ export const Item = styled(Box)({
     alignItems: 'center',
     overflow: 'hidden',
     justifyContent: 'center',
-    height: 650,
+    height: 550,
     borderRadius: 50,
 });
 
 export const ItemXs = styled(Box)({
     backgroundColor: primaryColor,
     color: thirdColor ,
-    display: 'flex',
-    justifyContent: 'center',
-    height: 200,
-    borderRadius: 10
+    borderRadius: 10,
+    padding: 2
 });
 
 export const CSSTypography = styled(Typography)({
