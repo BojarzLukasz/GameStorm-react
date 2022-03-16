@@ -1,9 +1,10 @@
 import React from 'react'
-import {Container, Box, Avatar, Typography, Button, ThemeProvider } from '@mui/material'
+import {Container, Box, Avatar, Typography, Button, ThemeProvider, Grid} from '@mui/material'
 import {useFormik} from "formik"
 import * as Yup from "yup"
 import customTheme from '../customTheme'
 import {CssTextField} from "../customTheme"
+import {Link} from "react-router-dom";
 const ForgotPassword = () => {
     const formik = useFormik({
         initialValues: {
@@ -61,6 +62,13 @@ const ForgotPassword = () => {
                         >
                             Reset password
                         </Button>
+                        <Grid container>
+                            <Grid item xs>
+                                <Link to='/' style={{textDecoration: 'none', color: 'white'}}>
+                                    Go back to Sign in
+                                </Link>
+                            </Grid>
+                        </Grid>
                     </Box>
                 </Box>
             </Container>

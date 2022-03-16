@@ -112,7 +112,7 @@ const SignIn = () => {
                             </Grid>
                             <Grid item>
                                 <Link to='/SignUp' style={{textDecoration: 'none', color: 'white'}}>
-                                    "Don't have an account? Sign Up"
+                                    Don't have an account? Sign Up
                                 </Link>
                             </Grid>
                         </Grid>

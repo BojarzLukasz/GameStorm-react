@@ -26,7 +26,7 @@ const CustomAppBar = ({user}) => {
             justifyContent: "space-between"}}>
             {loggedIn ? <Link style={{textDecoration: 'none', color:'white'}} to='/Main'><Toolbar>
                 <GamepadOutlined sx={{mr: 2}} fontSize="large"/>
-                <Typography variant='h3'>
+                <Typography variant='h6' sx={{ fontSize: {md : 45} }}>
                     GameStorm
                 </Typography>
             </Toolbar></Link> : <Toolbar>
@@ -36,10 +36,10 @@ const CustomAppBar = ({user}) => {
                 </Typography>
             </Toolbar>}
             {loggedIn && <Toolbar>
-                <Typography sx={{ fontSize: 25}}>{user}</Typography>
-                <Avatar sx={{ m: 1, mr: 3, bgcolor: 'secondary.main' }}/>
+                <Typography variant='h6' sx={{ fontSize: {md: 25}, display: {xs : 'none', sm: 'flex'} }}>{user}</Typography>
+                <Avatar sx={{ m: 1, mr: 3, bgcolor: 'secondary.main', display: {xs : 'none', sm: 'flex'} }}/>
                 <Button href="/" variant="contained" color='secondary' onClick={logOut}>
-                    <Typography>Log Out</Typography>
+                    <Typography sx={{fontSize: {sm: 15}}}>Log Out</Typography>
                 </Button>
             </Toolbar>}
         </AppBar>

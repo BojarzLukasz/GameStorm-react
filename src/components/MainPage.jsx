@@ -14,7 +14,7 @@ const MainPage = () =>  {
         <>
             <Container
                 maxWidth={'lg'}
-                style={{display: 'flex', justifyContent: 'center', marginBottom: '100px'}}>
+                style={{display: 'flex', justifyContent: 'center', paddingBottom: 100}}>
                 <SimpleSlider/>
             </Container>
             <Container>

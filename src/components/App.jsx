@@ -26,7 +26,7 @@ function App() {
     return(
         <ThemeProvider theme={customTheme}>
             <CssBaseline/>
-            <main style={{pt: 10, minHeight: '100vh', background: "linear-gradient(204deg, rgba(104,15,121,1) 0%, rgba(17,12,2,1) 87%)"}}>
+            <main style={{paddingBottom: 50, minHeight: 1000, background: "linear-gradient(204deg, rgba(104,15,121,1) 0%, rgba(17,12,2,1) 87%)"}}>
                 <Router>
                     <CustomAppBar user={user}/>
                     <Routes>

@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react'
-import {Container, Box, Avatar, Typography, Button, ThemeProvider, Alert } from '@mui/material'
+import {Container, Box, Avatar, Typography, Button, ThemeProvider, Alert, Grid} from '@mui/material'
 import {useFormik} from "formik"
 import * as Yup from "yup"
 import {createUserWithEmailAndPassword, onAuthStateChanged} from "firebase/auth"
 import {auth} from "../firebase-config";
 import customTheme from '../customTheme'
 import {CssTextField} from "../customTheme"
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 const SignUp = () => {
     const navigate = useNavigate()
@@ -59,7 +59,7 @@ const SignUp = () => {
                     }}>
                     <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}/>
                     <Typography component="h1" variant="h5">
-                        Sign Up
+                        Sign up
                     </Typography>
                     <Box component="form" onSubmit={formik.handleSubmit} noValidate sx={{ mt: 1 }}>
                         {error && <Alert severity="error">this mail is already used</Alert>}
@@ -97,8 +97,15 @@ const SignUp = () => {
                             sx={{ mt: 3, mb: 2 }}
                             color='secondary'
                         >
-                            Sign Up
+                            Sign up
                         </Button>
+                        <Grid container>
+                            <Grid item xs>
+                                <Link to='/' style={{textDecoration: 'none', color: 'white'}}>
+                                    Go back to Sign in
+                                </Link>
+                            </Grid>
+                        </Grid>
                     </Box>
                 </Box>
             </Container>
